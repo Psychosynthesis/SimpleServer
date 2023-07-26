@@ -1,0 +1,19 @@
+{
+  "name": "expres-server",
+  "version": "1.0.0",
+  "description": "Simple NodeJS server with express framework",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Psychosynthesis/SimpleServer.git"
+  },
+  "homepage": "https://github.com/Psychosynthesis/SimpleServer#readme",
+  "author": "Nick G.",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
