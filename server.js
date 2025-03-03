@@ -1,49 +1,30 @@
-const path = require('path');
-const express = require('express');
-const bodyParser = require("body-parser");
+import cors from 'cors';
+import express from 'express';
+import { stringify } from 'flatted';
+
+import { setSecurityHeaders } from './middlewares/index.js';
+import apiRouter from './routes/api.router.js';
+import frontendRouter from './routes/frontend.router.js';
+
 const server = express();
+const allowedOrigins = [ "http://localhost:3000", "http://45.153.71.94" ];
 
-// Add headers before the routes are defined
-server.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST'); // Request methods you wish to allow
-  // Request headers you wish to allow
-   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type'); // Website you wish to allow to connect
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  // res.setHeader('Access-Control-Allow-Credentials', true);
-  // Pass to next layer of middleware
-  next();
+server.disable('x-powered-by'); // Remove unnecs header
+server.use(setSecurityHeaders);
+server.use('/', cors({ origin: allowedOrigins, credentials: true }), frontendRouter);
+server.use('/api', cors({ origin: allowedOrigins, credentials: true }), apiRouter);
+
+
+server.use((err, req, res, next) => {
+  if (!res.headersSent) {
+    // if (process.env.NODE_ENV === 'production') {
+      console.error(`Unhandled error: ${err.message || stringify(err, null, 2)}`);
+    // }
+    // Устанавливаем статус ошибки, если он еще не был установлен
+    res.status(err.status || 500).json({ success: false, message: 'Something went wrong. Please mail to admin.' })
+  }
 });
 
-// Two variants of middleware used for handle input POST requests
-// server.use(express.json({ limit: '100mb' }));
-// server.use(express.urlencoded({ limit: '100mb' }));
-server.use(bodyParser.json({ limit: "150mb" }));
-server.use(bodyParser.urlencoded({ limit: "150mb", extended: true, parameterLimit: 5000000 }));
-
-
-server.use('/media', express.static(__dirname + '/media')); // Try get http://127.0.0.1:8080/media/test.json in browser
-server.use(express.static(__dirname + '/public')); // Will return index.html from get http://127.0.0.1:8080/
-
-// Custom handling for main index
-/* server.get('/', (req, res) => {
-    res.send({ message: 'Hello WWW!' });
-    // res.sendFile(`${__dirname}/public/index.html`);
-});*/
-
-server.post('/api', function(request, response) {
-  const input = request.body; // Access the parse results as request.body
-  console.log("request data is: ", input.data);
-});
-
-// Set status to response
-server.post('/forbiden', function(request, response) {
-  response.status(403);
-  response.send('403');
-});
-
-server.listen(8080, () => {
-  console.log('Server listening on port 8080');
-  console.log('Open http://127.0.0.1:8080 in your browser');
+server.listen(3000, () => {
+  console.log('Server listening on port 3000');
 });
