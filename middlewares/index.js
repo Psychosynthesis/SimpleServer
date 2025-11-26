@@ -1,2 +1,3 @@
-export { setSecurityHeaders } from './setSecurityHeaders.js'
-export { verifyClient } from './verifyClient.js'
+export * from './setSecurityHeaders.js'
+export * from './verifyClient.js'
+export * from './basicAuth.js'
