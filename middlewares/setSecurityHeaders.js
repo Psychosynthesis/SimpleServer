@@ -1,6 +1,6 @@
-export const setSecurityHeaders = (req, res, next) => {
-  const isProd = typeof process.env.NODE_ENV === 'string' && !process.env.NODE_ENV.toLowerCase().includes('dev');
+import { isProd } from '../shared/index.js';
 
+export const setSecurityHeaders = (req, res, next) => {
   const securityHeaders = {
     'X-Content-Type-Options': 'nosniff', // Блокирует попытки браузера угадать MIME-тип, защищает от MIME-sniffing атак
     'X-Frame-Options': 'DENY', // Запрещает отображение страницы в <frame>, <iframe>, <embed> (защита от clickjacking)

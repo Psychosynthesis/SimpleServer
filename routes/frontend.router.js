@@ -1,9 +1,23 @@
 import express, { Router } from 'express';
+import path from 'node:path';
 
-const router = Router({ mergeParams: true });
+export function createFrontendRouter(publicDir = './public') {
+  const router = Router({ mergeParams: true });
 
-router.use('/', express.static('./public/'));
-router.use('/assets', express.static('./public/assets'));
+  const absolutePublicDir = path.isAbsolute(publicDir)
+    ? publicDir
+    : path.resolve(process.cwd(), publicDir);
+
+  router.use('/', express.static(absolutePublicDir));
+  router.use('/assets', express.static(path.join(absolutePublicDir, 'assets')));
+
+  return router;
+}
+
+// Для обратной совместимости — дефолтный роутер с ./public
+const defaultRouter = createFrontendRouter();
+export default defaultRouter;
+
 
 /*
 Custom example handling for main index
@@ -16,5 +30,3 @@ Custom example handling for main index
     res.end();
 });
 */
-
-export default router

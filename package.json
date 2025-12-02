@@ -1,10 +1,15 @@
 {
-  "name": "expres-server",
-  "version": "1.2.0",
+  "name": "dispense",
+  "version": "1.0.0",
   "description": "NodeJS server with express boilerplate",
+  "type": "module",
   "main": "server.js",
+  "bin": {
+    "dispense": "./bin/run.js"
+  },
   "scripts": {
-    "start": "node server.js"
+    "dispense": "node ./bin/run.js run",
+    "start": "node ./bin/run.js run"
   },
   "repository": {
     "type": "git",

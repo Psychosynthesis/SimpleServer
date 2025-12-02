@@ -1,0 +1,20 @@
+import { COLORS } from './constants.js'
+
+export const isProd = typeof process.env.NODE_ENV === 'string' && !process.env.NODE_ENV.toLowerCase().includes('dev');
+
+export const getStartMessage = (port) => (
+`${COLORS.magenta}
+ ░█▀▄░▀█▀░█▀▀░█▀█░█▀▀░█▀█░█▀▀░█▀█░▀█▀░█▀█░█▀▄
+ ░█░█░░█░░▀▀█░█▀▀░█▀▀░█░█░▀▀█░█▀█░░█░░█░█░█▀▄
+ ░▀▀░░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀
+
+ ${COLORS.cyan}Dispensator server listening on port ${port ?? 3000}${COLORS.reset}
+`);
+
+export const isErrorWithMessage = (error) => {
+  return error instanceof Error && 'message' in error;
+};
+
+export const isErrorWithCode = (error) => {
+  return error instanceof Error && 'code' in error;
+};

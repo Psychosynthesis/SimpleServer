@@ -1,3 +1,5 @@
+import { CREDS } from '../shared/index.js';
+
 export const basicAuth = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
@@ -23,7 +25,7 @@ export const basicAuth = (req, res, next) => {
         }
 
         // Проверка учетных данных
-        if (user === 'username' && pass === 'pass') {
+        if (user === CREDS.username && pass === CREDS.pass) {
             return next();
         }
 

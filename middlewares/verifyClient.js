@@ -1,4 +1,4 @@
-const VERIFICATION_CODE = '34f52fvbtbbgy78yBbi76KHGuyggvjGvmHjh7';
+import { VERIFICATION_CODE } from '../shared/index.js';
 
 // Данный посредник проверяет, валиден ли клиент отправивший данные
 export const verifyClient = async (req, res, next) => {
