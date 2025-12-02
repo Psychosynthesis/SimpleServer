@@ -15,7 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/Psychosynthesis/SimpleServer.git"
   },
-  "homepage": "https://github.com/Psychosynthesis/SimpleServer#readme",
+  "homepage": "https://github.com/Psychosynthesis/SimpleServer",
+  "keywords": [ "server", "express", "serve" ],
   "author": "Nick G.",
   "license": "MIT",
   "dependencies": {
