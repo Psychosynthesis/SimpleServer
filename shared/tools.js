@@ -4,11 +4,11 @@ export const isProd = typeof process.env.NODE_ENV === 'string' && !process.env.N
 
 export const getStartMessage = (port) => (
 `${COLORS.magenta}
- ░█▀▄░▀█▀░█▀▀░█▀█░█▀▀░█▀█░█▀▀░█▀█░▀█▀░█▀█░█▀▄
- ░█░█░░█░░▀▀█░█▀▀░█▀▀░█░█░▀▀█░█▀█░░█░░█░█░█▀▄
- ░▀▀░░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀
+ ░█▀▄░▀█▀░█▀▀░█▀█░█▀▀░█▀█░█▀▀░█▀▀
+ ░█░█░░█░░▀▀█░█▀▀░█▀▀░█░█░▀▀█░█▀▀
+ ░▀▀░░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀░▀▀▀
 
- ${COLORS.cyan}Dispensator server listening on port ${port ?? 3000}${COLORS.reset}
+ ${COLORS.cyan}Dispense server listening on port${COLORS.reset} ${port ?? 3000}
 `);
 
 export const isErrorWithMessage = (error) => {
